@@ -98,12 +98,20 @@ function processFile() {
     
     const separador = "\t";
     
+    const seg = {
+      cpf: segmentoB.substring(21, 32),
+      nome: segmentoA.substring(43, 73),
+      agencia: segmentoA.substring(24, 28),
+      conta: segmentoA.substring(30, 42),
+      valor: segmentoA.substring(120, 134)
+    }
+    
     const retorno = 
-    segmentoB.substring(21, 32) + separador +
-    segmentoA.substring(43, 73) + separador +
-    segmentoA.substring(24, 28) + separador + 
-    segmentoA.substring(30, 42) + separador + 
-    segmentoA.substring(120, 134);
+    seg.cpf + separador +
+    seg.nome + separador +
+    seg.agencia + separador + 
+    seg.conta + separador + 
+    seg.valor;
     
     return retorno;
 
