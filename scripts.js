@@ -54,7 +54,7 @@ function processFile() {
 
   const file = fileInput.files[0];
 
-  if (!file.name.endsWith('.txt')) {
+  if (!file.name.toLowerCase().endsWith('.txt')) {
     alert('Por favor, selecione um arquivo compatível.');
     return;
   }
@@ -70,7 +70,7 @@ function processFile() {
 
     const downloadLink = document.createElement('a');
     downloadLink.href = URL.createObjectURL(blob);
-    downloadLink.download = 'transformed.txt';
+    downloadLink.download = 'CNABCONVERTIDO.txt';
 
     downloadLink.click();
 
