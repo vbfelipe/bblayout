@@ -102,16 +102,16 @@ function processFile() {
       cpf: segmentoB.substring(21, 32),
       nome: segmentoA.substring(43, 73),
       agencia: segmentoA.substring(24, 28),
-      conta: segmentoA.substring(30, 42),
-      valor: segmentoA.substring(120, 134)
+      conta: (parseInt(segmentoA.substring(30, 42))),
+      valor: (parseFloat(segmentoA.substring(120, 134)) / 100).toFixed(2)
     }
     
     const retorno = 
-    seg.cpf + separador +
-    seg.nome + separador +
-    seg.agencia + separador + 
-    seg.conta + separador + 
-    seg.valor;
+      seg.cpf + separador +
+      seg.nome + separador +
+      seg.agencia + separador + 
+      seg.conta + separador + 
+      seg.valor;
     
     return retorno;
 
