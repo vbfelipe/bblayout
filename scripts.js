@@ -83,26 +83,26 @@ function processFile() {
 
   function transformText(fileContents) {
     
-    var transformedText = ""
+    const separador = ";";
+
+    var transformedText = `CPF${separador}Nome${separador}Agencia${separador}Conta${separador}Valor${separador}\n`
     const lines = fileContents.split('\n');
     for(i = 2; i<(lines.length - 3); i = i + 2)
     {
-        transformedText = transformedText + processa(lines[i], lines[i+1]) + "\n";
+        transformedText = transformedText + processa(lines[i], lines[i+1],separador) + "\n";
         
     }
     console.log(transformedText);
     return transformedText;
   }
 
-  function processa(segmentoA, segmentoB){
-    
-    const separador = "\t";
+  function processa(segmentoA, segmentoB, separador){
     
     const seg = {
       cpf: segmentoB.substring(21, 32),
-      nome: segmentoA.substring(43, 73),
+      nome: segmentoA.substring(43, 73).trim(),
       agencia: segmentoA.substring(24, 28),
-      conta: (parseInt(segmentoA.substring(30, 42))),
+      conta: (parseInt(segmentoA.substring(30, 41))),
       valor: (parseFloat(segmentoA.substring(120, 134)) / 100).toFixed(2)
     }
     
@@ -111,7 +111,7 @@ function processFile() {
       seg.nome + separador +
       seg.agencia + separador + 
       seg.conta + separador + 
-      seg.valor;
+      seg.valor + separador;
     
     return retorno;
 
