@@ -64,9 +64,10 @@ function processFile() {
     reader.onload = function(e) {
     
     const fileContents = e.target.result;
+    console.log(fileContents);
     const transformedText = transformText(fileContents);
    
-    const blob = new Blob([transformedText], { type: 'text/plain' });
+    const blob = new Blob([transformedText], { type: 'text/plain;charset=ANSI' });
 
     const downloadLink = document.createElement('a');
     downloadLink.href = URL.createObjectURL(blob);
@@ -78,7 +79,7 @@ function processFile() {
 
   };
 
-  reader.readAsText(file);
+  reader.readAsText(file, 'ISO-8859-1');
 }
 
   function transformText(fileContents) {
@@ -92,7 +93,7 @@ function processFile() {
         transformedText = transformedText + processa(lines[i], lines[i+1],separador) + "\n";
         
     }
-    console.log(transformedText);
+   // console.log(transformedText);
     return transformedText;
   }
 
@@ -100,7 +101,7 @@ function processFile() {
     
     const seg = {
       cpf: segmentoB.substring(21, 32),
-      nome: segmentoA.substring(43, 73).trim(),
+      nome: segmentoA.substring(43, 73).trim().normalize('NFD').replace(/[\u0300-\u036f]/g, ""),
       agencia: segmentoA.substring(24, 28),
       conta: (parseInt(segmentoA.substring(30, 41))),
       valor: (parseFloat(segmentoA.substring(120, 134)) / 100).toFixed(2)
